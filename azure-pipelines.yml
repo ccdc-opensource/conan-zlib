@@ -3,6 +3,8 @@ variables:
   conan.channel: 'testing'
   conan.package: 'zlib'
   conan.package_version: '1.2.11'
+  conan.python_version: '3.6'
+  conan.python: 'python36'
 
 jobs:
   - job: Centos7
@@ -11,7 +13,10 @@ jobs:
     # We use a container to run the build as we must be compatible with centos7's older glibc
     # container: rockdreamer/centos7-gcc9:latest
     steps:
-    - script: python -m pip install --upgrade conan
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: $(conan.python_version)
+    - script: $(conan.python) -m pip install --upgrade conan
       displayName: 'Install conan'
 
     - task: ArtifactoryConan@1
