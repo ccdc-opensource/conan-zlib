@@ -11,6 +11,9 @@ jobs:
     # We use a container to run the build as we must be compatible with centos7's older glibc
     # container: rockdreamer/centos7-gcc9:latest
     steps:
+    - script: python -m pip install --upgrade conan
+      displayName: 'Install conan'
+
     - task: ArtifactoryConan@1
       inputs:
         conanCommand: 'Add Remote'
