@@ -1,0 +1,93 @@
+variables:
+  conan.user: 'ccdc'
+  conan.channel: 'testing'
+  conan.package: 'zlib'
+  conan.package_version: '1.2.11'
+
+jobs:
+  - job: Centos7
+    pool:
+      vmImage: "ubuntu-latest"
+    # We use a container to run the build as we must be compatible with centos7's older glibc
+    container: rockdreamer/centos7-gcc9:latest
+    variables:
+      artifactory.platformName: "centos7"
+    steps:
+    - task: ArtifactoryConan@1
+      inputs:
+        conanCommand: 'Add Remote'
+        remoteName: 'ccdc-3rdparty-conan-mix'
+        artifactoryService: 'devops-ccdc-3rd-party'
+        conanRepo: 'ccdc-3rdparty-conan-mix'
+        purgeExistingRemotes: true
+    - task: ArtifactoryConan@1
+      inputs:
+        conanCommand: 'Custom'
+        customArguments: 'copy $(conan.package)/$(conan.package_version) $(conan.user)/$(conan.channel)'
+        buildName: '$(Build.DefinitionName)'
+        buildNumber: '$(Build.BuildNumber)'
+
+  # - job: Ubuntu1804
+  #   pool:
+  #     vmImage: "ubuntu-18.04"
+  #   variables:
+  #     artifactory.platformName: "ubuntu18.04"
+  #   steps:
+  #     - task: CmdLine@2
+  #       inputs:
+  #         script: "sudo apt-get -y install libgl1-mesa-dev libxmuu-dev libx11-dev"
+  #       displayName: "Add prerequisites"
+  #     - task: UsePythonVersion@0
+  #       inputs:
+  #         versionSpec: "3.8"
+  #       displayName: "Use latest python 3.8"
+  #     # No need to setup specific python, the container's python3 will be used
+  #     - template: common-tasks.yml
+
+  # - job: macOS
+  #   pool:
+  #     vmImage: "macOS-latest"
+  #   variables:
+  #     artifactory.platformName: "darwin"
+  #   steps:
+  #     - task: UsePythonVersion@0
+  #       inputs:
+  #         versionSpec: "3.8"
+  #       displayName: "Use latest python 3.8"
+  #     # No need to setup specific python, the container's python3 will be used
+  #     - template: common-tasks.yml
+
+  # - job: WindowsVS2019
+  #   pool:
+  #     vmImage: "windows-2019"
+  #   variables:
+  #     build_vs_version: "2019"
+  #     artifactory.platformName: "windows"
+  #   steps:
+  #     - task: ArtifactoryGenericDownload@3
+  #       inputs:
+  #         connection: 'devops-ccdc-3rd-party'
+  #         specSource: 'taskConfiguration'
+  #         fileSpec: |
+  #           {
+  #             "files": [
+  #               {
+  #                 "pattern": "ccdc-3rdparty-python-interpreters/conquest-windows-build-requirements/",
+  #                 "target": "$(System.ArtifactsDirectory)/"
+  #               }
+  #             ]
+  #           }
+  #         replaceSpecVars: true
+  #         failNoOp: true
+  #       displayName: "Download windows requirements from artifactory"
+  #     - task: CmdLine@2
+  #       inputs:
+  #         script: "tree $(System.ArtifactsDirectory) /f"
+  #       displayName: "Contents of ArtifactsDirectory"
+
+  #     - task: UsePythonVersion@0
+  #       inputs:
+  #         versionSpec: "3.8"
+  #       displayName: "Use latest python 3.8"
+  #     # No need to setup specific python, the container's python3 will be used
+  #     - template: common-tasks.yml
