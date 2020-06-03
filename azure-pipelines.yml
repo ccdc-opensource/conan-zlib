@@ -9,9 +9,7 @@ jobs:
     pool:
       vmImage: "ubuntu-latest"
     # We use a container to run the build as we must be compatible with centos7's older glibc
-    container: rockdreamer/centos7-gcc9:latest
-    variables:
-      artifactory.platformName: "centos7"
+    # container: rockdreamer/centos7-gcc9:latest
     steps:
     - task: ArtifactoryConan@1
       inputs:
