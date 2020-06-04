@@ -11,13 +11,19 @@ jobs:
     pool:
       vmImage: "ubuntu-latest"
     # We use a container to run the build as we must be compatible with centos7's older glibc
-    # container: rockdreamer/centos7-gcc9:latest
+    container: rockdreamer/centos7-gcc9:latest
     steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: $(conan.python_version)
+    # - task: UsePythonVersion@0
+    #   inputs:
+    #     versionSpec: $(conan.python_version)
     - script: $(conan.python) -m pip install --upgrade conan
       displayName: 'Install conan'
+    - task: ArtifactoryConan@1
+      inputs:
+        conanCommand: 'Config Install'
+        configSourceType: 'git'
+        configInstallGit: 'git@ssh.dev.azure.com:v3/ccdc/ccdc-3rd-party/conan-3rd-party-configuration'
+        extraArguments: '--args "-b initial"'
 
     - task: ArtifactoryConan@1
       inputs:
