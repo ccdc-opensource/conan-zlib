@@ -16,6 +16,8 @@ jobs:
     # - task: UsePythonVersion@0
     #   inputs:
     #     versionSpec: $(conan.python_version)
+    - script: printenv
+    
     - script: $(conan.python) -m pip install --upgrade conan
       displayName: 'Install conan'
     - task: ArtifactoryConan@1
