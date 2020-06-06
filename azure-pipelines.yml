@@ -15,11 +15,27 @@ jobs:
     steps:
     - script: $(conan.python) -m pip install --upgrade conan
       displayName: 'Install conan'
+
+    - task: ArtifactoryGenericDownload@3
+      inputs:
+        connection: 'devops-ccdc-3rd-party'
+        specSource: 'taskConfiguration'
+        fileSpec: |
+          {
+            "files": [
+              {
+                "pattern": "ccdc-conan-metadata/common-3rdparty-config.zip",
+                "target": "$(Pipeline.Workspace)/.conan/"
+              }
+            ]
+          }
+        failNoOp: true
+    
     - task: ArtifactoryConan@1
       inputs:
         conanCommand: 'Config Install'
-        configSourceType: 'git'
-        configInstallGit: 'https://ccdc@dev.azure.com/ccdc/ccdc-3rd-party/_git/conan-3rd-party-configuration'
+        configSourceType: 'zip'
+        configZipPath: '$(Pipeline.Workspace)/.conan/common-3rdparty-config.zip'
         conanUserHome: '$(Pipeline.Workspace)/.conan'
 
     - task: ArtifactoryConan@1
