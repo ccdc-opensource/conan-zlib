@@ -21,7 +21,7 @@ jobs:
         configSourceType: 'git'
         configInstallGit: 'git@ssh.dev.azure.com:v3/ccdc/ccdc-3rd-party/conan-3rd-party-configuration'
         extraArguments: '--args "-b initial"'
-        conanUserHome: '$(Agent.HomeDirectory)/conanhome'
+        conanUserHome: '$(Pipeline.Workspace)/.conan'
 
     - task: ArtifactoryConan@1
       inputs:
@@ -30,7 +30,7 @@ jobs:
         artifactoryService: 'devops-ccdc-3rd-party'
         conanRepo: 'ccdc-3rdparty-conan-mix'
         purgeExistingRemotes: true
-        conanUserHome: '$(Agent.HomeDirectory)/conanhome'
+        conanUserHome: '$(Pipeline.Workspace)/.conan'
 
     - task: ArtifactoryConan@1
       inputs:
@@ -38,7 +38,7 @@ jobs:
         customArguments: 'copy $(conan.package)/$(conan.package_version) $(conan.user)/$(conan.channel)'
         buildName: '$(Build.DefinitionName)'
         buildNumber: '$(Build.BuildNumber)'
-        conanUserHome: '$(Agent.HomeDirectory)/conanhome'
+        conanUserHome: '$(Pipeline.Workspace)/.conan'
 
   # - job: Ubuntu1804
   #   pool:
