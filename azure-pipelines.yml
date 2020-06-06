@@ -20,7 +20,6 @@ jobs:
         conanCommand: 'Config Install'
         configSourceType: 'git'
         configInstallGit: 'git@ssh.dev.azure.com:v3/ccdc/ccdc-3rd-party/conan-3rd-party-configuration'
-        extraArguments: '--args "-b initial"'
         conanUserHome: '$(Pipeline.Workspace)/.conan'
 
     - task: ArtifactoryConan@1
