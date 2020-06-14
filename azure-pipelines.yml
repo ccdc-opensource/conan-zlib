@@ -10,3 +10,5 @@ extends:
   parameters:
     package: zlib
     package_version: 1.2.11
+    source_repository: public-conan-center
+    destination_repository: ccdc-3rdparty-conan
