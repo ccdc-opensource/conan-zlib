@@ -26,6 +26,17 @@ jobs:
     steps:
       # No need to setup specific python, the container's python3 will be used
       - template: single-build.yml@templates
+        parameters:
+          conan.python: $(conan.python)
+          conan.package: $(conan.package)
+          conan.package_version: $(conan.package_version)
+          conan.user: $(conan.user)
+          conan.channel: $(conan.channel)
+          conan.profile: $(conan.profile)
+          conan.build_types:
+            - Release
+            - Debug
+            - RelWithDebInfo
 
   - job: Ubuntu20-Gcc10
     pool:
@@ -39,6 +50,17 @@ jobs:
     steps:
       # No need to setup specific python, the container's python3 will be used
       - template: single-build.yml@templates
+        parameters:
+          conan.python: $(conan.python)
+          conan.package: $(conan.package)
+          conan.package_version: $(conan.package_version)
+          conan.user: $(conan.user)
+          conan.channel: $(conan.channel)
+          conan.profile: $(conan.profile)
+          conan.build_types:
+            - Release
+            - Debug
+            - RelWithDebInfo
 
   - job: macOS
     pool:
@@ -51,6 +73,17 @@ jobs:
           versionSpec: "3.8"
         displayName: "Use latest python 3.8"
       - template: single-build.yml@templates
+        parameters:
+          conan.python: $(conan.python)
+          conan.package: $(conan.package)
+          conan.package_version: $(conan.package_version)
+          conan.user: $(conan.user)
+          conan.channel: $(conan.channel)
+          conan.profile: $(conan.profile)
+          conan.build_types:
+            - Release
+            - Debug
+            - RelWithDebInfo
 
   - job: WindowsVS2017
     pool:
@@ -63,6 +96,17 @@ jobs:
           versionSpec: "3.8"
         displayName: "Use latest python 3.8"
       - template: single-build.yml@templates
+        parameters:
+          conan.python: $(conan.python)
+          conan.package: $(conan.package)
+          conan.package_version: $(conan.package_version)
+          conan.user: $(conan.user)
+          conan.channel: $(conan.channel)
+          conan.profile: $(conan.profile)
+          conan.build_types:
+            - Release
+            - Debug
+            - RelWithDebInfo
 
   - job: WindowsVS2019
     pool:
@@ -75,3 +119,14 @@ jobs:
           versionSpec: "3.8"
         displayName: "Use latest python 3.8"
       - template: single-build.yml@templates
+        parameters:
+          conan.python: $(conan.python)
+          conan.package: $(conan.package)
+          conan.package_version: $(conan.package_version)
+          conan.user: $(conan.user)
+          conan.channel: $(conan.channel)
+          conan.profile: $(conan.profile)
+          conan.build_types:
+            - Release
+            - Debug
+            - RelWithDebInfo
