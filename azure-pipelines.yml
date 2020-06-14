@@ -17,7 +17,7 @@ resources:
       name: ccdc-3rd-party/conan-azure-devops
       ref: refs/tags/development
 
-  jobs:
+jobs:
   - job: Centos7
     pool:
       vmImage: "ubuntu-latest"
