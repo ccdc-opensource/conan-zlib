@@ -63,6 +63,13 @@ jobs:
         buildNumber: '$(Build.BuildNumber)'
         conanUserHome: '$(Pipeline.Workspace)/.conan'
 
+    - task: ArtifactoryConan@1
+      inputs:
+        conanCommand: 'Upload'
+        patternOrReference: '$(conan.package)/$(conan.package_version)@$(conan.user)/$(conan.channel)'
+        buildName: '$(Build.DefinitionName)'
+        buildNumber: '$(Build.BuildNumber)'
+        conanUserHome: '$(Pipeline.Workspace)/.conan'
 
   # - job: Ubuntu1804
   #   pool:
