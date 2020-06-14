@@ -11,7 +11,7 @@ resources:
     - repository: templates
       type: git
       name: ccdc-3rd-party/conan-azure-devops
-      ref: refs/tags/development
+      ref: refs/heads/development
 
 jobs:
   - job: Centos7
