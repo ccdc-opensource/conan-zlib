@@ -3,10 +3,6 @@ variables:
   conan.channel: 'testing'
   conan.package: 'zlib'
   conan.package_version: '1.2.11'
-  conan.build_types:
-    - Release
-    - Debug
-    - RelWithDebInfo
   # We use what is provided by the UsePythonVersion step in general
   conan.python: 'python'
 
