@@ -45,6 +45,8 @@ jobs:
     container: rockdreamer/ubuntu20-gcc10:latest
     variables:
       conan.profile: ubuntu20-gcc10-x86_64
+      # We can't use UsePythonVersion on this VM so we have to be explicit
+      conan.python: 'python3'
     steps:
       # No need to setup specific python, the container's python3 will be used
       - template: single-build.yml@templates
