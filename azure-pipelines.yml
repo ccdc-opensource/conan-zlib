@@ -14,7 +14,7 @@ resources:
       ref: refs/heads/development
 
 jobs:
-  - job: Centos7
+  - job: Centos7Gcc9
     pool:
       vmImage: "ubuntu-latest"
     # We use a container to run the build as we must be compatible with centos7's older glibc
@@ -38,7 +38,7 @@ jobs:
             - Debug
             - RelWithDebInfo
 
-  - job: Ubuntu20-Gcc10
+  - job: Ubuntu20Gcc10
     pool:
       vmImage: "ubuntu-latest"
     # We use a container to run the build as we must be compatible with centos7's older glibc
