@@ -3,16 +3,19 @@ variables:
   conan.channel: 'testing'
   conan.package: 'zlib'
   conan.package_version: '1.2.11'
-  conan.python: 'python3'
+  # We use what is provided by the UsePythonVersion step in general
+  conan.python: 'python'
 
 jobs:
   - job: Centos7
-    variables:
-      conan.profile: centos7-gcc9-x86_64
     pool:
       vmImage: "ubuntu-latest"
     # We use a container to run the build as we must be compatible with centos7's older glibc
     container: rockdreamer/centos7-gcc9:latest
+    variables:
+      conan.profile: centos7-gcc9-x86_64
+      # We can't use UsePythonVersion on this VM so we have to be explicit
+      conan.python: 'python3'
     steps:
       # No need to setup specific python, the container's python3 will be used
       - template: single-build.yml
