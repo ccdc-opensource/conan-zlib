@@ -27,13 +27,13 @@ jobs:
       # No need to setup specific python, the container's python3 will be used
       - template: single-build.yml@templates
         parameters:
-          conan.python: $(conan.python)
-          conan.package: $(conan.package)
-          conan.package_version: $(conan.package_version)
-          conan.user: $(conan.user)
-          conan.channel: $(conan.channel)
-          conan.profile: $(conan.profile)
-          conan.build_types:
+          python: $(conan.python)
+          package: $(conan.package)
+          package_version: $(conan.package_version)
+          user: $(conan.user)
+          channel: $(conan.channel)
+          profile: $(conan.profile)
+          build_types:
             - Release
             - Debug
             - RelWithDebInfo
@@ -51,13 +51,13 @@ jobs:
       # No need to setup specific python, the container's python3 will be used
       - template: single-build.yml@templates
         parameters:
-          conan.python: $(conan.python)
-          conan.package: $(conan.package)
-          conan.package_version: $(conan.package_version)
-          conan.user: $(conan.user)
-          conan.channel: $(conan.channel)
-          conan.profile: $(conan.profile)
-          conan.build_types:
+          python: $(conan.python)
+          package: $(conan.package)
+          package_version: $(conan.package_version)
+          user: $(conan.user)
+          channel: $(conan.channel)
+          profile: $(conan.profile)
+          build_types:
             - Release
             - Debug
             - RelWithDebInfo
@@ -74,13 +74,13 @@ jobs:
         displayName: "Use latest python 3.8"
       - template: single-build.yml@templates
         parameters:
-          conan.python: $(conan.python)
-          conan.package: $(conan.package)
-          conan.package_version: $(conan.package_version)
-          conan.user: $(conan.user)
-          conan.channel: $(conan.channel)
-          conan.profile: $(conan.profile)
-          conan.build_types:
+          python: $(conan.python)
+          package: $(conan.package)
+          package_version: $(conan.package_version)
+          user: $(conan.user)
+          channel: $(conan.channel)
+          profile: $(conan.profile)
+          build_types:
             - Release
             - Debug
             - RelWithDebInfo
@@ -97,13 +97,13 @@ jobs:
         displayName: "Use latest python 3.8"
       - template: single-build.yml@templates
         parameters:
-          conan.python: $(conan.python)
-          conan.package: $(conan.package)
-          conan.package_version: $(conan.package_version)
-          conan.user: $(conan.user)
-          conan.channel: $(conan.channel)
-          conan.profile: $(conan.profile)
-          conan.build_types:
+          python: $(conan.python)
+          package: $(conan.package)
+          package_version: $(conan.package_version)
+          user: $(conan.user)
+          channel: $(conan.channel)
+          profile: $(conan.profile)
+          build_types:
             - Release
             - Debug
             - RelWithDebInfo
@@ -120,13 +120,13 @@ jobs:
         displayName: "Use latest python 3.8"
       - template: single-build.yml@templates
         parameters:
-          conan.python: $(conan.python)
-          conan.package: $(conan.package)
-          conan.package_version: $(conan.package_version)
-          conan.user: $(conan.user)
-          conan.channel: $(conan.channel)
-          conan.profile: $(conan.profile)
-          conan.build_types:
+          python: $(conan.python)
+          package: $(conan.package)
+          package_version: $(conan.package_version)
+          user: $(conan.user)
+          channel: $(conan.channel)
+          profile: $(conan.profile)
+          build_types:
             - Release
             - Debug
             - RelWithDebInfo
