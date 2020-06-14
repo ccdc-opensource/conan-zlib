@@ -3,11 +3,21 @@ variables:
   conan.channel: 'testing'
   conan.package: 'zlib'
   conan.package_version: '1.2.11'
-  conan.build_type: Release
+  conan.build_types:
+    - Release
+    - Debug
+    - RelWithDebInfo
   # We use what is provided by the UsePythonVersion step in general
   conan.python: 'python'
 
-jobs:
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: ccdc-3rd-party/conan-azure-devops
+      ref: refs/tags/development
+
+  jobs:
   - job: Centos7
     pool:
       vmImage: "ubuntu-latest"
@@ -19,7 +29,20 @@ jobs:
       conan.python: 'python3'
     steps:
       # No need to setup specific python, the container's python3 will be used
-      - template: single-build.yml
+      - template: single-build.yml@templates
+
+  - job: Ubuntu20-Gcc10
+    pool:
+      vmImage: "ubuntu-latest"
+    # We use a container to run the build as we must be compatible with centos7's older glibc
+    container: conanio/gcc10:latest
+    variables:
+      conan.profile: ubuntu20-gcc10-x86_64
+      # We can't use UsePythonVersion on this VM so we have to be explicit
+      conan.python: 'python3'
+    steps:
+      # No need to setup specific python, the container's python3 will be used
+      - template: single-build.yml@templates
 
   - job: macOS
     pool:
@@ -31,7 +54,7 @@ jobs:
         inputs:
           versionSpec: "3.8"
         displayName: "Use latest python 3.8"
-      - template: single-build.yml
+      - template: single-build.yml@templates
 
   - job: WindowsVS2017
     pool:
@@ -43,7 +66,7 @@ jobs:
         inputs:
           versionSpec: "3.8"
         displayName: "Use latest python 3.8"
-      - template: single-build.yml
+      - template: single-build.yml@templates
 
   - job: WindowsVS2019
     pool:
@@ -55,4 +78,4 @@ jobs:
         inputs:
           versionSpec: "3.8"
         displayName: "Use latest python 3.8"
-      - template: single-build.yml
+      - template: single-build.yml@templates
