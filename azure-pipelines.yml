@@ -51,7 +51,6 @@ jobs:
       inputs:
         conanCommand: 'Install'
         pathOrReference: '$(conan.package)/$(conan.package_version)@'
-        extraArguments: '--profile centos7-gcc9-x86_64 --build=zlib'
         buildName: '$(Build.DefinitionName)'
         buildNumber: '$(Build.BuildNumber)'
         conanUserHome: '$(Pipeline.Workspace)/.conan'
@@ -65,8 +64,18 @@ jobs:
 
     - task: ArtifactoryConan@1
       inputs:
+        conanCommand: 'Install'
+        pathOrReference: '$(conan.package)/$(conan.package_version)@$(conan.user)/$(conan.channel)'
+        extraArguments: '--profile centos7-gcc9-x86_64 --build=zlib'
+        buildName: '$(Build.DefinitionName)'
+        buildNumber: '$(Build.BuildNumber)'
+        conanUserHome: '$(Pipeline.Workspace)/.conan'
+
+    - task: ArtifactoryConan@1
+      inputs:
         conanCommand: 'Upload'
         patternOrReference: '$(conan.package)/$(conan.package_version)@$(conan.user)/$(conan.channel)'
+        extraArguments: '--all'
         buildName: '$(Build.DefinitionName)'
         buildNumber: '$(Build.BuildNumber)'
         conanUserHome: '$(Pipeline.Workspace)/.conan'
