@@ -14,7 +14,7 @@ resources:
       ref: refs/heads/development
 
 jobs:
-  - job: Centos7Gcc9
+  - job: centos7_gcc9
     pool:
       vmImage: "ubuntu-latest"
     # We use a container to run the build as we must be compatible with centos7's older glibc
@@ -38,7 +38,7 @@ jobs:
             - Debug
             - RelWithDebInfo
 
-  - job: Ubuntu20Gcc10
+  - job: ubuntu2004_gcc10
     pool:
       vmImage: "ubuntu-latest"
     # We use a container to run the build as we must be compatible with centos7's older glibc
@@ -62,7 +62,7 @@ jobs:
             - Debug
             - RelWithDebInfo
 
-  - job: macOS
+  - job: macos1015_xcode11
     pool:
       vmImage: "macOS-latest"
     variables:
@@ -85,7 +85,7 @@ jobs:
             - Debug
             - RelWithDebInfo
 
-  - job: WindowsVS2017
+  - job: win2016_vs2017
     pool:
       vmImage: "vs2017-win2016"
     variables:
@@ -108,7 +108,7 @@ jobs:
             - Debug
             - RelWithDebInfo
 
-  - job: WindowsVS2019
+  - job: win2019_vs2019
     pool:
       vmImage: "windows-2019"
     variables:
